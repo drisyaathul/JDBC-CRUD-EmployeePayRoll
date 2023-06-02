@@ -1,9 +1,7 @@
 package com.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.SortedMap;
 
 public class EmployeePayRoll {
     public static void main(String[] args) {
@@ -31,6 +29,30 @@ public class EmployeePayRoll {
                         "(3,'Terissa','female',25,'kerala',888889999,'IT',10000,2000000,90000,12000,50000,2500000)";
                 statement.executeUpdate(insertQuery);
                 System.out.println("Values Added Successfully");
+            }
+            try(Statement statement = connection.createStatement()) {
+                String selectQuery = "select * from Payroll_Tb";
+                ResultSet resultSet = statement.executeQuery(selectQuery);
+
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    int age = resultSet.getInt("age");
+                    String address = resultSet.getString("address");
+                    double phoneNumber = resultSet.getDouble("phoneNumber");
+                    String department = resultSet.getString("department");
+                    double salary = resultSet.getDouble("salary");
+                    double basicPay = resultSet.getDouble("basic_pay");
+                    double deductions = resultSet.getDouble("deductions");
+                    double taxablePay = resultSet.getDouble("taxable_pay");
+                    double incomeTax = resultSet.getDouble("income_tax");
+                    double netPay = resultSet.getDouble("net_pay");
+
+                    System.out.println("ID :"+id+" , Name : "+name+" , Age : "+age+", Address : "+address+" , Phone Number : "+phoneNumber+", "+
+                            "Department : "+department+" , Salary :"+salary+" , Basic Pay : "+basicPay+" , Deductions : "+deductions+" ," +
+                            "Taxable Pay : "+taxablePay+" , Income Tax : "+incomeTax+" , Net Pay : "+netPay);
+                }
+                resultSet.close();
             }
         }catch (SQLException e) {
             e.printStackTrace();
