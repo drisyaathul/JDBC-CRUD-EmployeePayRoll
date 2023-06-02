@@ -59,6 +59,11 @@ public class EmployeePayRoll {
                 statement.executeUpdate(updateQuery);
                 System.out.println("Basic Pay is Updated successfully");
             }
+            try (Statement statement = connection.createStatement()){
+                String updateQuery = "update Payroll_Tb set salary = 20000.00 where id = 3";
+                statement.executeUpdate(updateQuery);
+                System.out.println("Salary is Updated successfully");
+            }
         }catch (SQLException e) {
             e.printStackTrace();
         }
