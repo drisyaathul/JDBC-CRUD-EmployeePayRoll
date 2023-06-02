@@ -18,7 +18,7 @@ public class EmployeePayRoll {
             try(Statement statement = connection.createStatement()){
                 String createTableQuery = "create table Payroll_Tb (id int primary key, name varchar(20), age int, gender varchar(20),address varchar(60),phoneNumber double,department varchar(20),salary double,basic_pay double," +
                         "deductions double,taxable_pay double,income_tax double,net_pay double)";
-                statement.executeUpdate(createTableQuery);
+//                statement.executeUpdate(createTableQuery);
                 System.out.println("Table is created Successfully");
             }
             //Insert the values
@@ -27,7 +27,7 @@ public class EmployeePayRoll {
                         " values(1,'Drisya','female',20,'lumut',778889999,'CIVIL',5000,5000000,80000,10000,30000,1800000)," +
                         "(2,'Divya','female',22,'perak',9999999,'IT',6000,6000000,30000,10000,40000,2000000)," +
                         "(3,'Terissa','female',25,'kerala',888889999,'IT',10000,2000000,90000,12000,50000,2500000)";
-                statement.executeUpdate(insertQuery);
+//                statement.executeUpdate(insertQuery);
                 System.out.println("Values Added Successfully");
             }
             try(Statement statement = connection.createStatement()) {
@@ -53,6 +53,11 @@ public class EmployeePayRoll {
                             "Taxable Pay : "+taxablePay+" , Income Tax : "+incomeTax+" , Net Pay : "+netPay);
                 }
                 resultSet.close();
+            }
+            try (Statement statement = connection.createStatement()){
+                String updateQuery = "update Payroll_Tb set basic_pay = 3000000.00 where id = 3";
+                statement.executeUpdate(updateQuery);
+                System.out.println("Basic Pay is Updated successfully");
             }
         }catch (SQLException e) {
             e.printStackTrace();
